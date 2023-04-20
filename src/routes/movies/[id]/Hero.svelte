@@ -9,36 +9,36 @@
 		movie.images.backdrops.find((image) => !image.iso_639_1) || movie.images.backdrops[0];
 </script>
 
-<div class="hero">
-	<div class="backdrop">
-		<img
-			src={media(backdrop.file_path, 1280)}
-			style="aspect-ratio: {backdrop.aspect_ratio}"
-			alt={movie.title}
-			use:smoothload
-		/>
-		<div class="blur-overlay" />
-	</div>
-</div>
+{#if backdrop}
+	<div class="hero">
+		<div class="backdrop">
+			<img
+				class="w-full"
+				src={media(backdrop.file_path, 1280)}
+				style="aspect-ratio: {backdrop.aspect_ratio}"
+				alt={movie.title}
+				use:smoothload
+			/>
 
-<style>
+			<div class="blur-overlay" />
+		</div>
+	</div>
+{/if}
+
+<style lang="postcss">
 	.hero {
 		display: grid;
 		/* background: black; */
 	}
 
 	.backdrop {
+		@apply mx-auto my-0 w-full;
 		max-width: calc(var(--column) + 10rem);
-		margin: 0 auto;
-		width: 100%;
 	}
 
 	.blur-overlay {
-		width: 100%;
-		/* height: 100%; */
-		height: 120%;
-		position: absolute;
-		inset: 0;
+		@apply w-full h-[120%] absolute inset-0 bg-no-repeat block z-0 pointer-events-none;
+		content: '';
 		background-image: linear-gradient(
 				90deg,
 				#14181d 0,
@@ -91,31 +91,5 @@
 				rgba(20, 24, 29, 0.016) 56.87777778%,
 				rgba(20, 24, 29, 0) 58.51851852%
 			);
-		background-repeat: no-repeat;
-		content: '';
-		display: block;
-		z-index: 0;
-		pointer-events: none;
-	}
-
-	img {
-		width: 100%;
-	}
-
-	@media (min-width: 60em) {
-		.hero {
-			/* grid-template-columns: 1fr 60em;
-			grid-template-rows: auto; */
-		}
-		.backdrop {
-			/* grid-column: 2/3; */
-		}
-		.backdrop::after {
-			/* width: 15rem;
-			height: 100%;
-			left: 0;
-			bottom: 0;
-			background: linear-gradient(to right, black, transparent); */
-		}
 	}
 </style>

@@ -3,7 +3,6 @@
 	import Hero from './Hero.svelte';
 	import { media } from '$lib/api';
 	import { smoothload } from '$lib/actions';
-	import { tooltipAction } from 'svelte-legos';
 	import justwatch from '$lib/images/justwatch.svg';
 	import RatingsCurve from './RatingsCurve.svelte';
 	import DetailsRow from './DetailsRow.svelte';
@@ -34,7 +33,7 @@
 
 <Hero {movie} />
 
-<div class="column container -mt-40">
+<div class={`column container ${movie.images?.backdrops.length ? '-mt-40' : 'mt-24'}`}>
 	<div class="relative w-full">
 		<div class="sticky top-4 flex flex-col gap-1">
 			<img
@@ -110,7 +109,7 @@
 		</div>
 
 		<div class="flex flex-col-reverse md:flex-row gap-4">
-			<div class="flex flex-col gap-6 w-full md:w-3/4">
+			<div class="flex flex-col gap-6 w-full">
 				<p class="text-slate-400 font-serif">{movie.overview}</p>
 
 				<div>
@@ -134,13 +133,12 @@
 						</div>
 					</div>
 					{#if activeTab === 'Cast'}
-						<!-- content here -->
 						<div class="flex flex-wrap gap-1 text-slate-400 text-xs">
 							{#each cast as person, i}
 								{#if i <= limit}
 									<span
-										class="cursor-pointer bg-slate-800 px-[6px] py-[3px] rounded-[3px] mb-px shadow-sm hover:text-white"
-										use:tooltipAction={{ content: person.character, placement: 'center' }}
+										class="tooltip cursor-pointer bg-slate-800 px-[6px] py-[3px] rounded-[3px] mb-px shadow-sm hover:text-white"
+										data-text={person.character}
 									>
 										{person.name}
 									</span>
@@ -297,7 +295,7 @@
 				{/if}
 			</div>
 
-			<div class="max-w-[230px] md:w-1/4 flex flex-col">
+			<div class="max-w-[200px] md:w-full flex flex-col">
 				<div
 					class="flex justify-between items-baseline text-slate-400 pb-1 border-b border-b-slate-600"
 				>

@@ -8,14 +8,14 @@
 	$: console.log('$page', $page);
 </script>
 
-<div class="header">
-	<nav>
-		<a href="/" class="logo">
-			<img src={logo} alt="Betterloxd" />
+<div class="flex items-center justify-center w-full absolute top-0 left-0 right-0 z-50">
+	<nav class="text-white h-16 w-full flex items-center justify-between column">
+		<a href="/" class="flex gap-2 items-center text-3xl font-black">
+			<img class="h-8" src={logo} alt="Betterloxd" />
 			Betterloxd
 		</a>
 
-		<div class="links">
+		<div class="flex gap-4">
 			<a href="/search">Search</a>
 			<a href="/watchlist">Watchlist</a>
 			<a href="/login">Login</a>
@@ -25,98 +25,36 @@
 
 <main
 	class:infinite={$page.data.infinite}
-	class:is-home={$page.url.pathname === '/'}
 	class:is-movie={$page.data.movie?.title}
 	style="background-image: url({mainbg})"
 >
 	<slot />
 </main>
 
-<footer>
-	<p>
-		Data provided by <a href="https://www.themoviedb.org/"><img src={tmdb} alt="the movie db" /></a>
-	</p>
+<footer class="flex justify-center h-20 p-4">
+	<span class="flex flex-nowrap items-center text-spaced text-sm font-bold">
+		Data provided by <a href="https://www.themoviedb.org/"
+			><img class="ml-2 h-3" src={tmdb} alt="the movie db" /></a
+		>
+	</span>
 </footer>
 
-<style>
-	.header {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 100%;
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		z-index: 999;
-	}
-
-	nav {
-		display: flex;
-		width: 100%;
-		height: 4rem;
-		align-items: center;
-		justify-content: space-between;
-		max-width: var(--column);
-		padding: 0 var(--side);
-		/* color: var(--accent); */
-	}
-
-	.logo {
-		font-weight: 800;
-		font-size: 2em;
-		color: white;
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-	}
-
-	.logo img {
-		height: 30px;
-	}
-
+<style lang="postcss">
 	a {
-		color: inherit;
-		text-decoration: none;
-		font-weight: 600;
-		color: #ccc;
-	}
-
-	img {
-		height: 1rem;
-	}
-
-	.links {
-		display: flex;
-		gap: 1rem;
+		@apply text-inherit no-underline font-semibold;
 	}
 
 	main {
+		@apply mt-16 pb-16;
 		background: #14181c 0 -1px repeat-x;
-		margin-top: 4rem;
-		padding-bottom: 4rem;
-		/* padding: 30px 0; */
 	}
 
 	main.infinite {
-		height: 0;
-		flex: 1;
-		overflow: hidden;
-	}
-
-	main.is-home {
-		/* margin-top: 4rem; */
+		@apply h-0 flex-1 overflow-hidden;
 	}
 
 	main.is-movie {
+		@apply mt-0 pt-0;
 		background-image: none !important;
-		margin-top: 0;
-		padding-top: 0;
-	}
-
-	footer {
-		display: flex;
-		justify-content: center;
-		height: 5rem;
 	}
 </style>

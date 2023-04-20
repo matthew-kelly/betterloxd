@@ -35,8 +35,9 @@
 		{#each bars as bar}
 			<div class="flex items-end">
 				<div
-					class="bg-slate-600 max-h-[50px] min-h-[1px] hover:bg-slate-500 cursor-pointer"
+					class="tooltip bg-slate-600 max-h-[50px] min-h-[1px] hover:bg-slate-500 cursor-pointer"
 					style="height: {(bar.score / 10) * 50}px; width: 15px;"
+					data-text={bar.label}
 				/>
 			</div>
 		{/each}

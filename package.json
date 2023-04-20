@@ -27,8 +27,5 @@
 		"typescript": "^5.0.0",
 		"vite": "^4.2.0"
 	},
-	"type": "module",
-	"dependencies": {
-		"svelte-legos": "^0.2.1"
-	}
+	"type": "module"
 }
