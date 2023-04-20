@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { afterNavigate } from '$app/navigation';
+	import { smoothload } from '$lib/actions';
 	import { media } from '$lib/api';
 	import type { MovieListResult } from '$lib/types';
 	import { createEventDispatcher, onMount } from 'svelte';
@@ -55,7 +56,7 @@
 	<div class="results" bind:this={results}>
 		{#each movies.slice(a, b) as movie}
 			<a href="/movies/{movie.id}">
-				<img alt={movie.title} src={media(movie.poster_path, 500)} />
+				<img alt={movie.title} src={media(movie.poster_path, 500)} use:smoothload />
 			</a>
 		{/each}
 	</div>

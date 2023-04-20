@@ -23,6 +23,9 @@ export async function get(
 	return data;
 }
 
-export function media(file_path: string, width: number) {
+export function media(file_path: string, width: number | 'original') {
+	if (width === 'original') {
+		return `${media_base}/original${file_path}`;
+	}
 	return `${media_base}/w${width}${file_path}`;
 }

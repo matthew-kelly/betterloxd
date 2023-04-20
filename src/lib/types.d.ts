@@ -11,12 +11,14 @@ interface ProductionCountry {
 interface SpokenLanguage {
 	iso_639_1: string;
 	name: string;
+	english_name: string;
 }
 
 export interface MovieDetails {
 	adult: boolean;
 	backdrop_path: string;
 	budget: number;
+	credits: MovieCredits;
 	genres: Genre[];
 	homepage: string | null;
 	id: number;
@@ -31,6 +33,9 @@ export interface MovieDetails {
 	overview: string;
 	popularity: number;
 	poster_path: string;
+	production_companies: {
+		name: string;
+	}[];
 	production_countries: ProductionCountry[];
 	recommendations: {
 		page: number;
@@ -51,6 +56,18 @@ export interface MovieDetails {
 	};
 	vote_average: number;
 	vote_count: number;
+	'watch/providers': {
+		results: {
+			CA: {};
+		};
+	};
+	translations: {
+		translations: {
+			data: {
+				title: string;
+			};
+		}[];
+	};
 }
 
 export interface Image {
@@ -108,4 +125,33 @@ export interface MovieList {
 	};
 	total_pages: number;
 	total_results: number;
+}
+
+export interface MovieCredits {
+	id: number;
+	cast: CastMember[];
+	crew: CrewMember[];
+}
+
+export interface CastMember extends Member {
+	cast_id: number;
+	character: string;
+	order: number;
+}
+
+export interface CrewMember extends Member {
+	department: string;
+	job: string;
+}
+
+export interface Member {
+	adult: boolean;
+	gender: number | null;
+	id: number;
+	known_for_department: string;
+	name: string;
+	original_name: string;
+	popularity: number;
+	profile_path: string | null;
+	credit_id: string;
 }
