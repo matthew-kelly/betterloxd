@@ -9,9 +9,9 @@
 	$: logo = images.logos.find((image) => image.iso_639_1 === 'en');
 </script>
 
-<a class="backdrop column" href="/movies/{movie.id}">
+<a class="flex" href="/movies/{movie.id}">
 	<img
-		class="backdrop"
+		class="w-full"
 		src={media(backdrop.file_path, 1280)}
 		alt={movie.title}
 		style="aspect-ratio: {backdrop.aspect_ratio}"
@@ -29,22 +29,9 @@
 	{/if}
 </a>
 
-<style>
-	a {
-		display: flex;
-	}
-
-	.backdrop {
-		width: 100%;
-	}
-
+<style lang="postcss">
 	.logo {
-		position: absolute;
-		left: 2rem;
-		top: 0;
-		height: 100%;
-		width: 30%;
-		object-fit: contain;
+		@apply absolute left-8 top-0 h-full w-[30%] object-contain;
 		filter: drop-shadow(0 0 1rem black);
 	}
 </style>

@@ -43,6 +43,7 @@ export async function load({ data, params, fetch }) {
 	const streaming = movie['watch/providers'].results.CA;
 
 	const alternative_titles = movie?.translations?.translations
+		.filter((lang) => lang.data.title)
 		.map((lang) => lang.data.title)
 		.join(', ');
 

@@ -4,14 +4,15 @@
 	import { views } from '$lib/views';
 
 	export let data;
-
-	console.log(data);
 </script>
 
-<h1 class="column">Top trending movies</h1>
+<div class="column pt-4 mb-8">
+	<h1 class="font-bold text-2xl md:text-3xl mb-4">Top trending movies</h1>
+	<Hero movie={data.featured} />
+</div>
 
-<Hero movie={data.featured} />
-
-<Carousel view={views.trending} href="/movies/trending" movies={data.trending.results} />
-<Carousel view={views.now_playing} href="/movies/now_playing" movies={data.now_playing.results} />
-<Carousel view={views.upcoming} href="movies/upcoming" movies={data.upcoming.results} />
+<div class="flex flex-col gap-8 mb-4">
+	<Carousel view={views.trending} href="/movies/trending" movies={data.trending.results} />
+	<Carousel view={views.now_playing} href="/movies/now_playing" movies={data.now_playing.results} />
+	<Carousel view={views.upcoming} href="movies/upcoming" movies={data.upcoming.results} />
+</div>

@@ -58,7 +58,7 @@ export interface MovieDetails {
 	vote_count: number;
 	'watch/providers': {
 		results: {
-			CA: {};
+			CA: Streaming;
 		};
 	};
 	translations: {
@@ -68,6 +68,16 @@ export interface MovieDetails {
 			};
 		}[];
 	};
+}
+
+export interface Streaming {
+	link: string;
+	flatrate: {
+		link: string;
+		provider_name: string;
+		logo_path: string;
+		display_priority: number;
+	}[];
 }
 
 export interface Image {

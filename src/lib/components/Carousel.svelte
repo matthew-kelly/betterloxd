@@ -1,52 +1,81 @@
 <script lang="ts">
+	import { smoothload } from '$lib/actions';
 	import { media } from '$lib/api';
 	import type { MovieListResult } from '$lib/types';
 	import type { View } from '$lib/views';
 
 	export let movies: MovieListResult[];
-	export let view: View;
+	export let view: View | null = null;
 	export let href: string | null;
 </script>
 
-<h2 class="column">
-	{view.title}
-	{#if href}
-		<a {href}>see all</a>
+<div>
+	{#if view}
+		<div class="column flex justify-between w-full items-end mb-4">
+			<h2 class="font-bold text-xl md:text-2xl">
+				{view.title}
+			</h2>
+			{#if href}
+				<a class="text-spaced text-tiny md:text-xs px-2 py-1" {href}>see all</a>
+			{/if}
+		</div>
 	{/if}
-</h2>
 
-<div class="carousel">
-	{#each movies as movie}
-		<a href="/movies/{movie.id}">
-			<img alt={movie.title} src={media(movie.poster_path, 500)} />
-		</a>
-	{/each}
+	<div class="relative">
+		<div class="carousel px-4 md:px-0">
+			{#each movies as movie}
+				<a href="/movies/{movie.id}" class="h-full">
+					<img alt={movie.title} src={media(movie.poster_path, 500)} use:smoothload />
+				</a>
+			{/each}
+		</div>
+		<div class="overlay" />
+	</div>
 </div>
 
-<style>
+<style lang="postcss">
 	.carousel {
-		--padding: max(var(--side), calc(var(--side) + (100vw - var(--column)) / 2));
-		display: flex;
-		height: clamp(10rem, 25vw, 20rem);
-		overflow-x: auto;
-		overflow-y: hidden;
-		white-space: nowrap;
+		@apply flex whitespace-nowrap overscroll-x-contain overflow-x-auto overflow-y-hidden;
+
+		--padding: max(var(--side), calc(var(--side) + (100vw - 64rem) / 2));
+
+		height: clamp(12rem, 25vw, 20rem);
 		overscroll-behavior-x: contain;
 		scroll-snap-type: x mandatory;
 		scroll-padding-left: var(--padding);
 		padding: 0 var(--padding);
 		gap: 1rem;
 	}
-
 	.carousel::-webkit-scrollbar {
 		display: none;
 	}
 
-	a {
-		height: 100%;
+	.overlay {
+		@apply h-full w-full absolute inset-0 bg-no-repeat block z-0 pointer-events-none;
+		content: '';
+		background: linear-gradient(90deg, #14181c 0%, transparent 20%, transparent 80%, #14181c 100%);
+	}
+
+	@media (max-width: 90rem) {
+		.overlay {
+			background: linear-gradient(
+				90deg,
+				#14181c 0%,
+				transparent 10%,
+				transparent 90%,
+				#14181c 100%
+			);
+		}
+	}
+
+	@media (max-width: 70rem) {
+		.overlay {
+			display: none;
+		}
 	}
 
 	img {
 		height: 100%;
+		max-width: inherit;
 	}
 </style>

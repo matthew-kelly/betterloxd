@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import { fly } from 'svelte/transition';
 	import { cubicOut } from 'svelte/easing';
 	import logo from '$lib/images/logo.svg';
@@ -20,8 +21,8 @@
 
 <div class="flex items-center justify-center w-full absolute top-0 left-0 right-0 z-50">
 	<nav class="text-white h-16 w-full flex items-center justify-between column">
-		<a href="/" class="flex gap-2 items-center text-3xl font-extrabold">
-			<img class="h-6" src={logo} alt="Betterloxd" />
+		<a href="/" class="flex gap-2 items-center text-2xl md:text-3xl font-extrabold">
+			<img class="h-5 md:h-6" src={logo} alt="Betterloxd" />
 			Betterloxd
 		</a>
 
@@ -75,10 +76,10 @@
 	}
 
 	.menu-items {
-		@apply flex-col mt-8 gap-8 absolute top-10 left-2 right-2 bg-slate-600 h-fit p-8 rounded-md;
+		@apply flex-col gap-8 absolute top-16 left-2 right-2 bg-slate-600 h-fit p-8 rounded-md;
 	}
 	.menu-items > a {
-		@apply font-semibold text-xl md:text-base;
+		@apply font-semibold text-base md:text-sm;
 	}
 
 	.button-icon {
@@ -87,7 +88,7 @@
 
 	@screen md {
 		.menu-items {
-			@apply flex flex-row gap-6 items-center mt-0 bg-inherit w-auto p-0 static;
+			@apply flex flex-row gap-6 items-center bg-inherit w-auto p-0 static;
 		}
 	}
 </style>

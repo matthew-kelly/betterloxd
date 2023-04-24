@@ -50,7 +50,9 @@
 		@apply transition-opacity opacity-0 duration-300 z-10;
 	}
 	.tooltip:hover::before,
-	.tooltip:hover::after {
+	.tooltip:hover::after,
+	.tooltip:focus::before,
+	.tooltip:focus::after {
 		@apply opacity-100;
 	}
 }
