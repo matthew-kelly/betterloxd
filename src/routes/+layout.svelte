@@ -11,6 +11,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>{$page.data.title ? `${$page.data.title} | Betterloxd` : 'Betterloxd'}</title>
+</svelte:head>
+
 <Header />
 
 <main

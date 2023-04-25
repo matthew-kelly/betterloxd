@@ -19,7 +19,7 @@
 
 	export let data;
 
-	$: ({ movie, trailer, title, cast, crew, streaming, alternative_titles, directors } = data);
+	$: ({ movie, trailer, cast, crew, streaming, alternative_titles, directors } = data);
 
 	$: recommendations = movie.recommendations.results.filter(
 		(item) => item.popularity >= 50 || item.vote_count > 1000
@@ -33,10 +33,6 @@
 		limit = 1000;
 	}
 </script>
-
-<svelte:head>
-	<title>{movie.title} | Betterloxd</title>
-</svelte:head>
 
 <Hero {movie} />
 
@@ -115,7 +111,10 @@
 						</div>
 					</div>
 					{#if activeTab === 'Cast'}
-						<div in:fade class="flex flex-wrap gap-1 text-slate-400 text-xs overflow-x-hidden">
+						<div
+							in:fade
+							class="flex flex-wrap gap-1 text-slate-400 text-xs overflow-x-hidden md:overflow-x-visible"
+						>
 							{#each cast as person, i}
 								{#if i <= limit}
 									<span
@@ -287,19 +286,21 @@
 					<Streaming {streaming} />
 				</div>
 
-				<div
-					class="flex justify-between items-baseline text-slate-400 pb-1 border-b border-b-slate-600 w-full"
-				>
-					<span class="text-spaced text-xs md:text-sm">Ratings</span>
-					<span class="text-xs text-slate-600">
-						{#if movie.vote_count > 1000}
-							{Math.round(movie.vote_count / 1000)}K ratings
-						{:else}
-							{movie.vote_count} ratings
-						{/if}
-					</span>
-				</div>
-				<RatingsCurve rating={movie.vote_average} />
+				{#if movie.vote_average && movie.vote_average > 0}
+					<div
+						class="flex justify-between items-baseline text-slate-400 pb-1 border-b border-b-slate-600 w-full"
+					>
+						<span class="text-spaced text-xs md:text-sm">Ratings</span>
+						<span class="text-xs text-slate-600">
+							{#if movie.vote_count > 1000}
+								{Math.round(movie.vote_count / 1000)}K ratings
+							{:else}
+								{movie.vote_count} ratings
+							{/if}
+						</span>
+					</div>
+					<RatingsCurve rating={movie.vote_average} />
+				{/if}
 			</div>
 		</div>
 
