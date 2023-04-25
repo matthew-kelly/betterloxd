@@ -124,6 +124,8 @@ export interface MovieListResult {
 	video: boolean;
 	vote_average: number;
 	vote_count: number;
+	name: string | undefined;
+	first_air_date: string | undefined;
 }
 
 export interface MovieList {
@@ -133,6 +135,22 @@ export interface MovieList {
 		maximum: string;
 		minimum: string;
 	};
+	total_pages: number;
+	total_results: number;
+}
+
+export interface PeopleListResult {
+	adult: boolean;
+	id: number;
+	name: string;
+	known_for: MovieListResult[];
+	popularity: number;
+	profile_path: string | null;
+}
+
+export interface PeopleList {
+	page: number;
+	results: PeopleListResult[];
 	total_pages: number;
 	total_results: number;
 }

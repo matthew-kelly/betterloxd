@@ -25,7 +25,12 @@
 		<div class="carousel px-4 md:px-0">
 			{#each movies as movie}
 				<a href="/movies/{movie.id}" class="h-full">
-					<img alt={movie.title} src={media(movie.poster_path, 500)} use:smoothload />
+					<img
+						alt={movie.title}
+						src={media(movie.poster_path, 500)}
+						use:smoothload
+						class="rounded-md"
+					/>
 				</a>
 			{/each}
 		</div>

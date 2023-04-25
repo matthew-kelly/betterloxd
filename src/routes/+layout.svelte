@@ -17,11 +17,7 @@
 
 <Header />
 
-<main
-	class:infinite={$page.data.infinite}
-	class:is-movie={$page.data.movie?.title}
-	style="background-image: url({mainbg})"
->
+<main class="grow" class:is-movie={$page.data.movie?.title} style="background-image: url({mainbg})">
 	<slot />
 </main>
 
@@ -37,10 +33,6 @@
 	main {
 		@apply mt-16 pb-4 md:pb-16;
 		background: #14181c 0 -1px repeat-x;
-	}
-
-	main.infinite {
-		@apply h-0 flex-1 overflow-hidden;
 	}
 
 	main.is-movie {

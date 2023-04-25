@@ -38,13 +38,12 @@
 
 <div
 	class={`column md:grid gap-8 movie-grid ${
-		movie.images?.backdrops.length ? '-mt-20 md:-mt-40' : 'md:mt-24'
+		movie.images?.backdrops.length ? '-mt-20 md:-mt-40' : 'mt-16 md:mt-24'
 	}`}
 >
 	<div class="hidden md:block relative w-full">
 		<div class="flex sticky top-4 flex-col gap-1">
 			<Poster {movie} border={true} />
-
 			<Streaming {streaming} />
 		</div>
 	</div>
@@ -70,7 +69,7 @@
 					>
 				</span>
 			</div>
-			<div class="md:hidden grow-0 max-w-[33%]">
+			<div class="md:hidden grow-0 max-w-[33%] w-full">
 				<Poster {movie} border={true} />
 			</div>
 		</div>
