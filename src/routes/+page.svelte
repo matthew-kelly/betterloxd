@@ -7,7 +7,7 @@
 </script>
 
 <div class="column pt-4 mb-8">
-	<h1 class="font-bold text-2xl md:text-3xl mb-4">Top trending movies</h1>
+	<h1 class="font-bold text-2xl md:text-3xl mb-4">Today's top movie</h1>
 	<Hero movie={data.featured} />
 </div>
 

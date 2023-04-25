@@ -6,7 +6,7 @@ export async function load({ params, url, fetch }) {
 	const view = views[params.view];
 	const page = url.searchParams.get('page') ?? '1';
 
-	const data = (await api.get(fetch, view.endpoint, { page })) as MovieList;
+	const data = (await api.get(fetch, view.endpoint, { page, region: 'CA' })) as MovieList;
 
 	return {
 		view: params.view,

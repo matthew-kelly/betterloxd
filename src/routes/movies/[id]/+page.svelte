@@ -5,7 +5,7 @@
 	import DetailsRow from './DetailsRow.svelte';
 	import { format_money } from '$lib/utils';
 	import { afterNavigate } from '$app/navigation';
-	import Poster from './Poster.svelte';
+	import Poster from '$lib/components/Poster.svelte';
 	import Streaming from './Streaming.svelte';
 	import { fade } from 'svelte/transition';
 	import playicon from '$lib/images/play.svg';
@@ -43,7 +43,8 @@
 >
 	<div class="hidden md:block relative w-full">
 		<div class="flex sticky top-4 flex-col gap-1">
-			<Poster {movie} />
+			<Poster {movie} border={true} />
+
 			<Streaming {streaming} />
 		</div>
 	</div>
@@ -70,7 +71,7 @@
 				</span>
 			</div>
 			<div class="md:hidden grow-0 max-w-[33%]">
-				<Poster {movie} />
+				<Poster {movie} border={true} />
 			</div>
 		</div>
 

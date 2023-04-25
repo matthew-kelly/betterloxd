@@ -53,7 +53,7 @@
 	.overlay {
 		@apply h-full w-full absolute inset-0 bg-no-repeat block z-0 pointer-events-none;
 		content: '';
-		background: linear-gradient(90deg, #14181c 0%, transparent 20%, transparent 80%, #14181c 100%);
+		background: linear-gradient(90deg, #14181c 0%, transparent 20%, transparent 70%, #14181c 100%);
 	}
 
 	@media (max-width: 90rem) {
@@ -62,7 +62,7 @@
 				90deg,
 				#14181c 0%,
 				transparent 10%,
-				transparent 90%,
+				transparent 80%,
 				#14181c 100%
 			);
 		}

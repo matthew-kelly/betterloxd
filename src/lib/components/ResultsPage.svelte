@@ -1,113 +1,61 @@
 <script lang="ts">
-	import { afterNavigate } from '$app/navigation';
-	import { smoothload } from '$lib/actions';
-	import { media } from '$lib/api';
 	import type { MovieListResult } from '$lib/types';
-	import { createEventDispatcher, onMount } from 'svelte';
+	import { createEventDispatcher } from 'svelte';
+	import { fade } from 'svelte/transition';
+	import Poster from './Poster.svelte';
 
 	export let movies: MovieListResult[];
 	export let next: string | null;
+	export let loading = false;
 
 	const dispatch = createEventDispatcher();
 
-	let viewport: HTMLDivElement;
-	let results: HTMLDivElement;
-	let item_width: number;
-	let item_height: number;
-	let num_columns = 4;
+	let next_button: HTMLAnchorElement;
 
-	let a = 0; // first visible element
-	let b = movies.length; // first invisible element
-	let padding_top = 0;
-	let padding_bottom = 0;
-
-	function handle_resize() {
-		const first = results.firstChild as HTMLDivElement;
-		item_width = first.offsetWidth;
-		item_height = first.offsetHeight;
-		num_columns = 4;
-
-		handle_scroll();
-	}
 	function handle_scroll() {
-		const { scrollHeight, scrollTop, clientHeight } = viewport;
-
-		const remaining = scrollHeight - (scrollTop + clientHeight);
-		if (remaining < 400) {
+		if (!next_button) return;
+		const { top } = next_button.getBoundingClientRect();
+		const { innerHeight } = window;
+		if (top < innerHeight) {
 			dispatch('end');
 		}
-
-		a = Math.floor(scrollTop / item_height) * num_columns;
-		b = Math.ceil((scrollTop + clientHeight) / item_height) * num_columns;
-
-		padding_top = Math.floor(a / num_columns) * item_height;
-		padding_bottom = Math.floor((movies.length - b) / num_columns) * item_height;
 	}
-	onMount(handle_resize);
-
-	// afterNavigate(() => {
-	// 	viewport.scrollTo(0, 0);
-	// });
 </script>
 
-<svelte:window on:resize={handle_resize} />
+<svelte:window on:scroll={handle_scroll} />
 
-<div class="viewport" bind:this={viewport} on:scroll={handle_scroll}>
-	<div class="results" bind:this={results}>
-		{#each movies.slice(a, b) as movie}
-			<a href="/movies/{movie.id}">
-				<img alt={movie.title} src={media(movie.poster_path, 500)} use:smoothload />
-			</a>
-		{/each}
-	</div>
-
-	{#if next}
-		<a href={next}>Next page</a>
-	{/if}
+<div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-2">
+	{#each movies as movie}
+		<a href="/movies/{movie.id}">
+			<Poster {movie} />
+		</a>
+	{/each}
 </div>
 
-<style>
-	.viewport {
-		height: 0;
-		flex: 1;
-		overflow-y: auto;
-	}
-	.viewport::-webkit-scrollbar {
-		display: none;
-	}
-	.results {
-		--columns: 2;
-		display: grid;
-		grid-template-rows: 2em repeat(auto, 1fr);
-		grid-template-columns: repeat(var(--columns), 1fr);
-		margin: 0 -0.5rem;
-	}
-	a {
-		padding: 0.5rem;
-	}
-	img {
-		width: 100%;
-		aspect-ratio: 2 / 3;
-		height: auto;
-	}
-	@media (min-width: 30rem) {
-		.results {
-			--columns: 3;
-		}
-	}
-	@media (min-width: 40rem) {
-		.results {
-			--columns: 4;
-		}
-	}
-	@media (min-width: 50rem) {
-		.results {
-			--columns: 5;
-		}
-	}
-	@media (min-width: 60rem) {
-		.results {
-			--columns: 6;
-		}
-	}
-</style>
+{#if next}
+	<a
+		class="ml-auto mt-4 flex items-center justify-center px-4 py-2 text-spaced text-tiny md:text-xs rounded-md bg-slate-700 text-slate-200 transition duration-200"
+		href={next}
+		bind:this={next_button}
+		transition:fade
+	>
+		{#if loading}
+			<svg
+				class="animate-spin -ml-1 mr-3 h-4 w-4"
+				xmlns="http://www.w3.org/2000/svg"
+				fill="none"
+				viewBox="0 0 24 24"
+			>
+				<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" />
+				<path
+					class="opacity-75"
+					fill="currentColor"
+					d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+				/>
+			</svg>
+			Loading...
+		{:else}
+			Next page
+		{/if}
+	</a>
+{/if}

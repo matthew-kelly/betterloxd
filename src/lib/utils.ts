@@ -7,7 +7,6 @@ export function format_money(amount: number) {
 	let mult = 'M';
 	if (amount < 1000000) {
 		total = (amount / 1e3).toFixed(2);
-		console.log(amount, total);
 		mult = 'K';
 	} else {
 		total = (amount / 1e6).toFixed(2);
