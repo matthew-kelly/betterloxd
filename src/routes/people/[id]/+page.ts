@@ -17,10 +17,12 @@ export async function load({ data, params, fetch }) {
 	const credits_by_job = new Map();
 	const job_by_department = new Map(); // map job to department
 	// Actor
-	credits_by_job.set('Actor', []);
-	person.credits.cast.forEach((c) => {
-		credits_by_job.get('Actor').push(c);
-	});
+	if (person.credits.cast.length) {
+		credits_by_job.set('Actor', []);
+		person.credits.cast.forEach((c) => {
+			credits_by_job.get('Actor').push(c);
+		});
+	}
 	// Crew
 	person.credits.crew.forEach((c) => {
 		// job

@@ -29,7 +29,7 @@
 						alt={movie.title}
 						src={media(movie.poster_path, 300)}
 						use:smoothload
-						class="rounded-md"
+						class="rounded-md min-w-[128px]"
 					/>
 				</a>
 			{/each}

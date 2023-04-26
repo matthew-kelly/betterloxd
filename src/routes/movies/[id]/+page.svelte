@@ -121,16 +121,20 @@
 						>
 							{#each cast as person, i}
 								{#if i <= limit}
-									<!-- FIXME: figure out how to show character name on mobile -->
 									<a
 										href="/people/{person.id}"
-										class="tooltip cursor-pointer bg-slate-800 px-[6px] py-[3px] rounded-[3px] mb-px shadow-sm hover:text-white"
-										data-text={person.character}
+										class="md:tooltip group cursor-pointer bg-slate-800 px-[6px] py-[3px] rounded-[3px] mb-px shadow-sm hover:text-white"
+										data-text={person.character ? person.character : 'Unknown'}
 										role="button"
 										tabindex="0"
 										transition:fade|local
 									>
-										{person.name}
+										{person.name}<span class="md:hidden"
+											>&nbsp;&ndash; <span
+												class="text-lime-600 group-hover:text-lime-500 transition-colors duration-100"
+												>{person.character ? person.character : 'Unknown'}</span
+											></span
+										>
 									</a>
 								{/if}
 							{/each}

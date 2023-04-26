@@ -3,7 +3,7 @@ export function smoothload(node: HTMLImageElement) {
 		if (node.naturalWidth) return; // already loaded
 
 		node.style.opacity = '0';
-		node.style.transition = 'opacity 0.4s';
+		node.style.transition = 'opacity 0.25s';
 
 		node.addEventListener(
 			'load',

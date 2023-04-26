@@ -20,7 +20,7 @@
 				/>
 			{:else}
 				<div
-					class="w-full h-auto aspect-[2/3] max-w-[100px] bg-slate-800 flex flex-col items-center justify-center"
+					class="w-full h-auto aspect-[2/3] max-w-[100px] bg-slate-800 flex flex-col items-center justify-center rounded-md"
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"

@@ -51,7 +51,7 @@
 	}
 </script>
 
-<div class="column flex flex-col md:grid profile-grid gap-8 h-full my-8">
+<div class="column flex flex-col md:grid profile-grid gap-8 h-full my-8 overflow-x-clip">
 	<div class="flex flex-col">
 		<div class="flex flex-col gap-0.5">
 			<span class="text-spaced text-slate-400 text-xs">Films of</span>
@@ -155,7 +155,7 @@
 		grid-template-columns: 1fr 230px;
 	}
 	.menu-items {
-		@apply flex flex-col gap-0.5 absolute top-8 h-fit p-2 bg-slate-600 rounded-md z-10 w-[200px];
+		@apply flex flex-col gap-0.5 absolute top-8 h-fit p-2 bg-slate-600 rounded-md z-20 w-[200px];
 	}
 	.menu-items > button {
 		@apply font-semibold text-sm w-full bg-slate-600 hover:bg-slate-700 p-2 text-left;

@@ -11,7 +11,7 @@
 
 	<ResultsPage
 		movies={data.movies}
-		next={data.next_page ? `/movies/${data.view}?page=${data.next_page}?region=CA` : null}
+		next={data.next_page ? `/movies/${data.view}?page=${data.next_page}&region=CA` : null}
 		{loading}
 		on:end={async () => {
 			if (!data.next_page) return;

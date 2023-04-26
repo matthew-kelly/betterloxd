@@ -51,7 +51,12 @@
 		{#key data.query}
 			<div class="flex flex-col gap-8">
 				<div class="mt-2">
-					<span class="text-xs text-spaced">Jump to: </span>
+					<span
+						class="text-xs text-spaced {data.movies.length && data.people.length
+							? 'inline'
+							: 'hidden'}"
+						>Jump to:
+					</span>
 					{#if data.movies.length}
 						<button
 							on:click={() => h_movies.scrollIntoView({ behavior: 'smooth' })}
@@ -72,6 +77,10 @@
 							</span>
 						</button>
 					{/if}
+
+					{#if !data.movies.length && !data.people.length}
+						<p>No results</p>
+					{/if}
 				</div>
 
 				{#if data.movies.length}
@@ -90,7 +99,9 @@
 
 				<button
 					on:click={() => scrollTo(0, 0)}
-					class="mx-auto mt-2 p-2 bg-slate-700 hover:bg-slate-600 text-slate-300 font-semibold text-spaced text-xs rounded-md"
+					class="{data.movies.length && data.people.length
+						? 'block'
+						: 'hidden'} mx-auto mt-2 p-2 bg-slate-700 hover:bg-slate-600 text-slate-300 font-semibold text-spaced text-xs rounded-md"
 					>Back to top</button
 				>
 			</div>
