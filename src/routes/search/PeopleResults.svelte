@@ -15,7 +15,7 @@
 			{#if person.profile_path}
 				<img
 					class="w-1/3 h-auto aspect-[2/3] max-w-[100px] rounded-md"
-					src={media(person.profile_path, 500)}
+					src={media(person.profile_path, 200)}
 					alt={person.name}
 				/>
 			{:else}

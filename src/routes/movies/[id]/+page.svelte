@@ -63,10 +63,14 @@
 					<span class="italic mr-4">{'‘' + movie.original_title + '’'}</span>
 				{/if}
 				<span class="uppercase md:normal-case">
-					Directed by <span
-						class="normal-case text-base text-slate-200 md:underline underline-offset-4 decoration-slate-600 font-bold md:font-normal"
-						>{directors}</span
-					>
+					Directed by
+					{#each directors as director}
+						<a
+							href="/people/{director[1]}"
+							class="normal-case text-base text-slate-200 md:underline underline-offset-4 decoration-slate-600 font-bold md:font-normal"
+							>{director[0]}</a
+						><span class="last:hidden">,&nbsp;</span>
+					{/each}
 				</span>
 			</div>
 			<div class="md:hidden grow-0 max-w-[33%] w-full">
@@ -117,7 +121,9 @@
 						>
 							{#each cast as person, i}
 								{#if i <= limit}
-									<span
+									<!-- FIXME: figure out how to show character name on mobile -->
+									<a
+										href="/people/{person.id}"
 										class="tooltip cursor-pointer bg-slate-800 px-[6px] py-[3px] rounded-[3px] mb-px shadow-sm hover:text-white"
 										data-text={person.character}
 										role="button"
@@ -125,7 +131,7 @@
 										transition:fade|local
 									>
 										{person.name}
-									</span>
+									</a>
 								{/if}
 							{/each}
 							<span
@@ -148,11 +154,12 @@
 								{#if people.length}
 									<DetailsRow title={job}>
 										{#each people as person}
-											<span
-												class="cursor-pointer bg-slate-800 px-[6px] py-[3px] rounded-[3px] shadow-sm hover:text-white whitespace-nowrap"
+											<a
+												href="/people/{person.id}"
+												class="bg-slate-800 px-[6px] py-[3px] rounded-[3px] shadow-sm hover:text-white whitespace-nowrap"
 											>
 												{person.name}
-											</span>
+											</a>
 										{/each}
 									</DetailsRow>
 								{/if}
@@ -314,7 +321,7 @@
 				<div class="hidden md:grid grid-cols-6 gap-1 h-24 mt-2">
 					{#each recommendations.slice(0, 6) as rec}
 						<a href="/movies/{rec.id}">
-							<img alt={movie.title} src={media(rec.poster_path, 500)} use:smoothload />
+							<img alt={movie.title} src={media(rec.poster_path, 200)} use:smoothload />
 						</a>
 					{/each}
 				</div>

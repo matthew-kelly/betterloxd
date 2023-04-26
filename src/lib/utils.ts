@@ -13,3 +13,7 @@ export function format_money(amount: number) {
 	}
 	return '$' + total + mult + ' 🇺🇸';
 }
+
+export function getMaxValueKey(obj: { [key: string]: number }): string {
+	return Object.keys(obj).reduce((a, b) => (obj[a] > obj[b] ? a : b));
+}

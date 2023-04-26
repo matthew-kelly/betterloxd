@@ -1,9 +1,14 @@
 <script lang="ts">
 	import { smoothload } from '$lib/actions';
 	import { media } from '$lib/api';
-	import type { MovieDetails, MovieListResult } from '$lib/types';
+	import type {
+		CastMemberCredit,
+		CrewMemberCredit,
+		MovieDetails,
+		MovieListResult
+	} from '$lib/types';
 
-	export let movie: MovieDetails | MovieListResult;
+	export let movie: MovieDetails | MovieListResult | CastMemberCredit | CrewMemberCredit;
 	export let classes = '';
 	export let border = false;
 </script>
@@ -14,7 +19,7 @@
 			? 'border border-slate-400 rounded-md'
 			: ''} {classes}"
 		alt={movie.title}
-		src={media(movie.poster_path, 500)}
+		src={media(movie.poster_path, 300)}
 		use:smoothload
 	/>
 {:else}

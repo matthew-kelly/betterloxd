@@ -172,14 +172,37 @@ export interface CrewMember extends Member {
 	job: string;
 }
 
+export interface MemberCredit extends Member {
+	credit_id: string;
+	release_date: string;
+	poster_path: string;
+	title: string;
+}
+
+export interface CastMemberCredit extends MemberCredit {
+	character: string;
+}
+
+export interface CrewMemberCredit extends MemberCredit {
+	department: string;
+	job: string;
+}
+
 export interface Member {
 	adult: boolean;
+	biography: string | null;
+	birthday: string | null;
 	gender: number | null;
 	id: number;
 	known_for_department: string;
 	name: string;
 	original_name: string;
 	popularity: number;
+	place_of_birth: string | null;
 	profile_path: string | null;
 	credit_id: string;
+	credits: {
+		cast: CastMemberCredit[];
+		crew: CrewMemberCredit[];
+	};
 }

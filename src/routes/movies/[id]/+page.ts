@@ -16,8 +16,7 @@ export async function load({ data, params, fetch }) {
 
 	const directors = movie.credits.crew
 		.filter((person) => person.job === 'Director')
-		.map((person) => person.name)
-		.join(', ');
+		.map((person) => [person.name, person.id]);
 
 	const cast = movie.credits.cast;
 

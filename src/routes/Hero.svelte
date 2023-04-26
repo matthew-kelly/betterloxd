@@ -21,7 +21,7 @@
 	{#if logo}
 		<img
 			class="logo"
-			src={media(logo.file_path, 500)}
+			src={media(logo.file_path, 300)}
 			alt={movie.title}
 			style="aspect-ratio: {logo.aspect_ratio}"
 			use:smoothload

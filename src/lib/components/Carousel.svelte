@@ -27,7 +27,7 @@
 				<a href="/movies/{movie.id}" class="h-full">
 					<img
 						alt={movie.title}
-						src={media(movie.poster_path, 500)}
+						src={media(movie.poster_path, 300)}
 						use:smoothload
 						class="rounded-md"
 					/>
