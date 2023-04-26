@@ -172,7 +172,7 @@
 								<DetailsRow title="Studio">
 									{#each movie.production_companies as company}
 										<span
-											class="cursor-pointer bg-slate-800 px-[6px] py-[3px] rounded-[3px] shadow-sm hover:text-white whitespace-nowrap"
+											class="bg-slate-800 px-[6px] py-[3px] rounded-[3px] shadow-sm whitespace-nowrap"
 										>
 											{company.name}
 										</span>
@@ -181,7 +181,7 @@
 							{/if}
 							<DetailsRow title="Release date">
 								<span
-									class=" bg-slate-800 px-[6px] py-[3px] rounded-[3px] shadow-sm whitespace-nowrap"
+									class="bg-slate-800 px-[6px] py-[3px] rounded-[3px] shadow-sm whitespace-nowrap"
 								>
 									{new Date(movie.release_date).toLocaleDateString('en-CA', {
 										weekday: 'long',
@@ -194,7 +194,7 @@
 
 							<DetailsRow title="Budget">
 								<span
-									class=" bg-slate-800 px-[6px] py-[3px] rounded-[3px] shadow-sm whitespace-nowrap"
+									class="bg-slate-800 px-[6px] py-[3px] rounded-[3px] shadow-sm whitespace-nowrap"
 								>
 									{format_money(movie.budget)}
 								</span>
@@ -202,7 +202,7 @@
 
 							<DetailsRow title="Revenue">
 								<span
-									class=" bg-slate-800 px-[6px] py-[3px] rounded-[3px] shadow-sm whitespace-nowrap"
+									class="bg-slate-800 px-[6px] py-[3px] rounded-[3px] shadow-sm whitespace-nowrap"
 								>
 									{format_money(movie.revenue)}
 								</span>
@@ -212,7 +212,7 @@
 								<DetailsRow title="Country">
 									{#each movie.production_countries as country}
 										<span
-											class="cursor-pointer bg-slate-800 px-[6px] py-[3px] rounded-[3px] shadow-sm hover:text-white whitespace-nowrap"
+											class="bg-slate-800 px-[6px] py-[3px] rounded-[3px] shadow-sm whitespace-nowrap"
 										>
 											{country.name}
 										</span>
@@ -224,7 +224,7 @@
 								<DetailsRow title="Language">
 									{#each movie.spoken_languages as lang}
 										<span
-											class="cursor-pointer bg-slate-800 px-[6px] py-[3px] rounded-[3px] shadow-sm hover:text-white whitespace-nowrap"
+											class="bg-slate-800 px-[6px] py-[3px] rounded-[3px] shadow-sm whitespace-nowrap"
 										>
 											{lang.english_name}
 										</span>
@@ -248,7 +248,7 @@
 								<DetailsRow title="Genres">
 									{#each movie.genres as genre}
 										<span
-											class="cursor-pointer bg-slate-800 px-[6px] py-[3px] rounded-[3px] shadow-sm hover:text-white whitespace-nowrap"
+											class="bg-slate-800 px-[6px] py-[3px] rounded-[3px] shadow-sm whitespace-nowrap"
 										>
 											{genre.name}
 										</span>
