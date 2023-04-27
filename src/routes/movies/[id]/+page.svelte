@@ -286,10 +286,10 @@
 							src="https://www.youtube.com/embed/{trailer.key}"
 							title="YouTube video player"
 							frameborder="0"
-							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
 							allowfullscreen
 							id="trailer"
 							class="aspect-video w-full"
+							loading="lazy"
 						/>
 					</div>
 				{/if}
