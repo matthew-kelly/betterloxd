@@ -38,6 +38,7 @@ export const actions = {
 
 		const { email, password } = input.data;
 
+		// try to login first with email/password
 		const { data: login_data, error: login_error } = await supabase.auth.signInWithPassword({
 			email,
 			password
@@ -49,6 +50,7 @@ export const actions = {
 			throw redirect(303, url.searchParams.get('redirect_to') ?? '/');
 		}
 
+		// if login fails, register
 		const { data, error } = await supabase.auth.signUp({ email, password });
 
 		if (error) {

@@ -3,7 +3,7 @@ import { SUPABASE_URL, SUPABASE_KEY } from '$env/static/private';
 
 export const supabase = createClient(SUPABASE_URL, SUPABASE_KEY, {
 	auth: {
-		autoRefreshToken: false,
+		autoRefreshToken: true,
 		persistSession: false,
 		detectSessionInUrl: false
 	}
