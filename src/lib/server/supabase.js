@@ -8,5 +8,3 @@ export const supabase = createClient(SUPABASE_URL, SUPABASE_KEY, {
 		detectSessionInUrl: false
 	}
 });
-
-// TODO: api cron function to keep supabase alive, keep_live table, insert new row with ping:timestamptz

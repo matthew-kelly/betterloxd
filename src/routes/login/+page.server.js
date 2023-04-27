@@ -21,8 +21,6 @@ export function load({ request, url, locals }) {
 	};
 }
 
-// TODO: change site URL in supabase to live site, add redirect URL if necessary
-
 export const actions = {
 	register: async ({ request, cookies, url }) => {
 		const form = await request.formData();
