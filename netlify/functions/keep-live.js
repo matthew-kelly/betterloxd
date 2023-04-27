@@ -11,4 +11,4 @@ const keep_live = async function () {
 	};
 };
 
-export const handler = schedule('@hourly', keep_live); // @daily
+export const handler = schedule('@daily', keep_live);
