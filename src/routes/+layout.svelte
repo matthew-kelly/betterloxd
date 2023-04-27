@@ -3,6 +3,7 @@
 	import { page } from '$app/stores';
 	import tmdb from '$lib/images/tmdb_long.svg';
 	import mainbg from '$lib/images/main-bg.png';
+	import favicon from '$lib/images/favicon.svg';
 	import Header from './Header.svelte';
 	import * as api from '$lib/api';
 </script>
@@ -11,6 +12,7 @@
 	<title>{$page.data.title ? `${$page.data.title} | Betterloxd` : 'Betterloxd'}</title>
 	<link rel="preconnect" href={api.base} />
 	<meta name="description" content="The internet's other favourite movie site" />
+	<link rel="icon" href={favicon} />
 </svelte:head>
 
 <Header />
