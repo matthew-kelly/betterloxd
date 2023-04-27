@@ -7,8 +7,6 @@
 		MovieDetails,
 		MovieListResult
 	} from '$lib/types';
-	import blob from '$lib/images/blob.svg';
-	import 'lazysizes';
 
 	export let movie: MovieDetails | MovieListResult | CastMemberCredit | CrewMemberCredit;
 	export let classes = '';
@@ -16,15 +14,16 @@
 </script>
 
 {#if movie.poster_path}
-	<img
-		class="lazyload w-full aspect-[2/3] h-auto bg-slate-800 {border
-			? 'border border-slate-400 rounded-md'
-			: ''} {classes}"
-		alt={movie.title}
-		src={blob}
-		data-src={media(movie.poster_path, 300)}
-		use:smoothload
-	/>
+	{#key movie.poster_path}
+		<img
+			class="w-full aspect-[2/3] h-auto bg-slate-800 {border
+				? 'border border-slate-400 rounded-md'
+				: ''} {classes}"
+			alt={movie.title}
+			src={media(movie.poster_path, 300)}
+			use:smoothload
+		/>
+	{/key}
 {:else}
 	<div
 		class="w-full h-auto aspect-[2/3] bg-slate-800 flex flex-col items-center justify-center {classes} {border

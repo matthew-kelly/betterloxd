@@ -9,9 +9,7 @@
 	import Streaming from './Streaming.svelte';
 	import { fade } from 'svelte/transition';
 	import playicon from '$lib/images/play.svg';
-	// import blob_video from '$lib/images/blob-16x9.svg';
 	import { enhance } from '$app/forms';
-	import 'lazysizes';
 
 	afterNavigate(() => {
 		limit = 30;
@@ -283,7 +281,7 @@
 				{#if trailer}
 					<div class="flex flex-col" class:has-trailer={!!data.trailer}>
 						<iframe
-							data-src="https://www.youtube.com/embed/{trailer.key}"
+							src="https://www.youtube.com/embed/{trailer.key}"
 							title="YouTube video player"
 							frameborder="0"
 							allowfullscreen
