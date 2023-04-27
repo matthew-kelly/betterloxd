@@ -3,7 +3,6 @@
 	import { page } from '$app/stores';
 	import tmdb from '$lib/images/tmdb_long.svg';
 	import mainbg from '$lib/images/main-bg.png';
-	import { browser } from '$app/environment';
 	import Header from './Header.svelte';
 	import * as api from '$lib/api';
 </script>

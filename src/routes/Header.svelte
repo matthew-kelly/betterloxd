@@ -33,7 +33,6 @@
 			class="md:hidden text-white hover:text-slate-200 focus:text-slate-200 p-2"
 			role="menu"
 			aria-haspopup="true"
-			aria-expanded={show_menu}
 			on:click={toggle_navbar}
 			on:keydown={(e) => {
 				if (e.key === 'Enter' || e.key === ' ') toggle_navbar;
