@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { fly, fade } from 'svelte/transition';
+	import { fly } from 'svelte/transition';
 	import { cubicOut } from 'svelte/easing';
 	import logo from '$lib/images/logo.svg';
 	import { beforeNavigate } from '$app/navigation';
@@ -31,7 +31,6 @@
 		<button
 			type="button"
 			class="md:hidden text-white hover:text-slate-200 focus:text-slate-200 p-2"
-			role="menu"
 			aria-label="mobile menu button"
 			on:click={toggle_navbar}
 			on:keydown={(e) => {
@@ -47,15 +46,11 @@
 				{#if show_menu}
 					<title>close</title>
 					<path
-						in:fade={{ duration: 500, easing: cubicOut }}
 						d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"
 					/>
 				{:else}
 					<title>menu</title>
-					<path
-						in:fade={{ duration: 500, easing: cubicOut }}
-						d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z"
-					/>
+					<path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" />
 				{/if}
 			</svg>
 		</button>
@@ -64,6 +59,7 @@
 			<div
 				transition:fly={{ duration: 200, easing: cubicOut, y: -50 }}
 				class="menu-items {show_menu ? 'flex' : 'hidden'}"
+				role="menu"
 			>
 				<a role="menuitem" class="text-spaced md:hidden" href="/">Home</a>
 				<a role="menuitem" class="text-spaced" href="/search">Search</a>

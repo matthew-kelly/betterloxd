@@ -16,7 +16,7 @@
 				{view.title}
 			</h2>
 			{#if href}
-				<a class="text-spaced text-tiny md:text-xs px-2 py-1" {href}>see all</a>
+				<a class="text-spaced text-xs px-2 py-1" {href}>see all</a>
 			{/if}
 		</div>
 	{/if}

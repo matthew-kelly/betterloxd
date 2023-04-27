@@ -22,9 +22,9 @@
 </main>
 
 <footer class="flex justify-center h-20 p-4 bg-slate-800">
-	<span class="flex flex-nowrap items-center text-spaced text-tiny md:text-sm font-bold">
+	<span class="flex flex-nowrap items-center text-spaced text-xs md:text-sm font-bold">
 		Data provided by <a href="https://www.themoviedb.org/">
-			<img class="ml-2 h-2 md:h-3" src={tmdb} alt="the movie db" />
+			<img class="ml-2 h-[9px] md:h-3" src={tmdb} alt="the movie db" />
 		</a>
 	</span>
 </footer>
