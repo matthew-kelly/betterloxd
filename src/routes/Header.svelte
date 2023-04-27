@@ -32,6 +32,7 @@
 			type="button"
 			class="md:hidden text-white hover:text-slate-200 focus:text-slate-200 p-2"
 			role="menu"
+			aria-label="mobile menu button"
 			on:click={toggle_navbar}
 			on:keydown={(e) => {
 				if (e.key === 'Enter' || e.key === ' ') toggle_navbar;
@@ -64,19 +65,20 @@
 				transition:fly={{ duration: 200, easing: cubicOut, y: -50 }}
 				class="menu-items {show_menu ? 'flex' : 'hidden'}"
 			>
-				<a class="text-spaced md:hidden" href="/">Home</a>
-				<a class="text-spaced" href="/search">Search</a>
+				<a role="menuitem" class="text-spaced md:hidden" href="/">Home</a>
+				<a role="menuitem" class="text-spaced" href="/search">Search</a>
 				{#if $page.data.user}
-					<a class="text-spaced" href="/watchlist">Watchlist</a>
+					<a role="menuitem" class="text-spaced" href="/watchlist">Watchlist</a>
 					<form method="POST" use:enhance action="/logout" class="flex items-center">
 						<button
+							role="menuitem"
 							type="submit"
 							class="text-spaced font-semibold text-base md:text-sm text-shadow-sm shadow-slate-800"
 							>Logout</button
 						>
 					</form>
 				{:else}
-					<a class="text-spaced" href="/login">Login</a>
+					<a role="menuitem" class="text-spaced" href="/login">Login</a>
 				{/if}
 			</div>
 		{/if}
