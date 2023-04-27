@@ -4,13 +4,14 @@
 	import RatingsCurve from './RatingsCurve.svelte';
 	import DetailsRow from './DetailsRow.svelte';
 	import { format_money } from '$lib/utils';
-	import { afterNavigate } from '$app/navigation';
+	import { afterNavigate, invalidateAll } from '$app/navigation';
 	import Poster from '$lib/components/Poster.svelte';
 	import Streaming from './Streaming.svelte';
 	import { fade } from 'svelte/transition';
 	import playicon from '$lib/images/play.svg';
 	import { media } from '$lib/api';
 	import { smoothload } from '$lib/actions';
+	import { enhance } from '$app/forms';
 
 	afterNavigate(() => {
 		limit = 30;
@@ -32,6 +33,8 @@
 	function show_all_cast() {
 		limit = 1000;
 	}
+
+	let is_submitting = false;
 </script>
 
 <Hero {movie} />
@@ -293,6 +296,72 @@
 			</div>
 
 			<div class="md:max-w-[200px] md:w-full flex flex-col items-center">
+				<div
+					class="rounded-md bg-slate-800 bg-opacity-10 border border-slate-400 w-full flex flex-col p-4 mb-4"
+				>
+					{#if data.user}
+						<form
+							method="POST"
+							action="/watchlist?/{data.in_watchlist ? 'delete' : 'add'}"
+							use:enhance={() => {
+								is_submitting = true;
+
+								return async () => {
+									await invalidateAll();
+									is_submitting = false;
+								};
+							}}
+							class="flex justify-center items-center"
+						>
+							<input type="hidden" name="movie_id" value={movie.id} />
+							<button
+								disabled={is_submitting}
+								type="submit"
+								class="group max-w-[168px] md:max-w-full disabled:text-slate-500 disabled:cursor-not-allowed flex justify-center items-center gap-1 p-2 bg-slate-700 hover:bg-slate-800 text-slate-300 font-semibold text-spaced text-xs rounded-md"
+							>
+								{#if data.in_watchlist}
+									<span>Remove from watchlist</span>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										viewBox="0 0 24 24"
+										class="min-w-[40px] w-10 pr-1 fill-red-400 group-disabled:fill-slate-500"
+									>
+										<path
+											d="M14.47 15.08L11 13V7H12.5V12.25L15.58 14.08C15.17 14.36 14.79 14.7 14.47 15.08M13.08 19.92C12.72 19.97 12.37 20 12 20C7.58 20 4 16.42 4 12S7.58 4 12 4 20 7.58 20 12C20 12.37 19.97 12.72 19.92 13.08C20.61 13.18 21.25 13.4 21.84 13.72C21.94 13.16 22 12.59 22 12C22 6.5 17.5 2 12 2S2 6.5 2 12C2 17.5 6.47 22 12 22C12.59 22 13.16 21.94 13.72 21.84C13.4 21.25 13.18 20.61 13.08 19.92M21.12 15.46L19 17.59L16.88 15.47L15.47 16.88L17.59 19L15.47 21.12L16.88 22.54L19 20.41L21.12 22.54L22.54 21.12L20.41 19L22.54 16.88L21.12 15.46Z"
+										/>
+									</svg>
+								{:else}
+									<span>Add to watchlist</span>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										viewBox="0 0 24 24"
+										class="min-w-[40px] w-10 pr-1 fill-lime-400 group-disabled:fill-slate-500"
+									>
+										<path
+											d="M14.47 15.08L11 13V7H12.5V12.25L15.58 14.08C15.17 14.36 14.79 14.7 14.47 15.08M13.08 19.92C12.72 19.97 12.37 20 12 20C7.58 20 4 16.42 4 12S7.58 4 12 4 20 7.58 20 12C20 12.37 19.97 12.72 19.92 13.08C20.61 13.18 21.25 13.4 21.84 13.72C21.94 13.16 22 12.59 22 12C22 6.5 17.5 2 12 2S2 6.5 2 12C2 17.5 6.47 22 12 22C12.59 22 13.16 21.94 13.72 21.84C13.4 21.25 13.18 20.61 13.08 19.92M18 15V18H15V20H18V23H20V20H23V18H20V15H18Z"
+										/>
+									</svg>
+								{/if}
+							</button>
+						</form>
+					{:else}
+						<a
+							href="/login"
+							class="mx-auto max-w-[168px] md:max-w-full text-center p-2 bg-slate-700 hover:bg-slate-800 text-slate-300 fill-lime-400 font-semibold text-spaced text-xs rounded-md flex items-center justify-center"
+							><span>Login to add to watchlist</span>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								viewBox="0 0 24 24"
+								class="min-w-[40px] w-10 pr-2"
+							>
+								<path
+									d="M14.47 15.08L11 13V7H12.5V12.25L15.58 14.08C15.17 14.36 14.79 14.7 14.47 15.08M13.08 19.92C12.72 19.97 12.37 20 12 20C7.58 20 4 16.42 4 12S7.58 4 12 4 20 7.58 20 12C20 12.37 19.97 12.72 19.92 13.08C20.61 13.18 21.25 13.4 21.84 13.72C21.94 13.16 22 12.59 22 12C22 6.5 17.5 2 12 2S2 6.5 2 12C2 17.5 6.47 22 12 22C12.59 22 13.16 21.94 13.72 21.84C13.4 21.25 13.18 20.61 13.08 19.92M18 15V18H15V20H18V23H20V20H23V18H20V15H18Z"
+								/>
+							</svg></a
+						>
+					{/if}
+				</div>
+
 				<div class="md:hidden w-full mb-4">
 					<Streaming {streaming} />
 				</div>

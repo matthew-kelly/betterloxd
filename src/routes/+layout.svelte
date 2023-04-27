@@ -5,14 +5,13 @@
 	import mainbg from '$lib/images/main-bg.png';
 	import { browser } from '$app/environment';
 	import Header from './Header.svelte';
-
-	$: if (browser) {
-		console.log('$page', $page);
-	}
+	import * as api from '$lib/api';
 </script>
 
 <svelte:head>
 	<title>{$page.data.title ? `${$page.data.title} | Betterloxd` : 'Betterloxd'}</title>
+	<link rel="preconnect" href={api.base} />
+	<meta name="description" content="The internet's other favourite movie site" />
 </svelte:head>
 
 <Header />

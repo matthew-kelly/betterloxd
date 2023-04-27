@@ -50,6 +50,7 @@
 		scroll-padding-left: var(--padding);
 		padding: 0 var(--padding);
 		gap: 1rem;
+		scrollbar-width: none;
 	}
 	.carousel::-webkit-scrollbar {
 		display: none;

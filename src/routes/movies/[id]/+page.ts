@@ -54,6 +54,7 @@ export async function load({ data, params, fetch }) {
 		streaming,
 		alternative_titles,
 		trailer,
+		in_watchlist: data.in_watchlist,
 		title: movie.title
 	};
 }

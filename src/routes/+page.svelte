@@ -7,6 +7,11 @@
 </script>
 
 <div class="column pt-4 mb-8">
+	{#if data.user?.email}
+		<span class="text-spaced text-center font-semibold text-xs md:text-sm block mb-4 text-lime-400"
+			>Welcome {data.user.email}!</span
+		>
+	{/if}
 	<h1 class="font-bold text-2xl md:text-3xl mb-4">Today's top movie</h1>
 	<Hero movie={data.featured} />
 </div>

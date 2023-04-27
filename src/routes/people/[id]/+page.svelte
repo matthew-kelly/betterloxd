@@ -74,9 +74,9 @@
 						if (e.key === 'Enter' || e.key === ' ') toggle_dropdown();
 					}}
 					tabindex="0"
-					class="flex gap-1 p-2 text-slate-300 font-semibold text-spaced text-xs rounded-md cursor-pointer select-none"
+					class="flex gap-1 p-2 text-slate-300 text-spaced text-xs rounded-md cursor-pointer select-none"
 				>
-					Role: {current_job}
+					Role: <span class="font-semibold">{current_job}</span>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						viewBox="0 0 24 24"
@@ -124,7 +124,7 @@
 					src={media(person.profile_path, 300)}
 					alt={person.name}
 					loading="eager"
-					class="rounded-md border border-slate-400 max-w-[230px]"
+					class="mx-auto md:mx-0 rounded-md border border-slate-400 max-w-[230px]"
 				/>
 			{/if}
 		</div>

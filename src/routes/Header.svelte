@@ -3,6 +3,8 @@
 	import { cubicOut } from 'svelte/easing';
 	import logo from '$lib/images/logo.svg';
 	import { beforeNavigate } from '$app/navigation';
+	import { page } from '$app/stores';
+	import { enhance } from '$app/forms';
 
 	let show_menu = false;
 	let screen_width: number;
@@ -66,8 +68,18 @@
 			>
 				<a class="text-spaced md:hidden" href="/">Home</a>
 				<a class="text-spaced" href="/search">Search</a>
-				<a class="text-spaced" href="/watchlist">Watchlist</a>
-				<a class="text-spaced" href="/login">Login</a>
+				{#if $page.data.user}
+					<a class="text-spaced" href="/watchlist">Watchlist</a>
+					<form method="POST" use:enhance action="/logout" class="flex items-center">
+						<button
+							type="submit"
+							class="text-spaced font-semibold text-base md:text-sm text-shadow-sm shadow-slate-800"
+							>Logout</button
+						>
+					</form>
+				{:else}
+					<a class="text-spaced" href="/login">Login</a>
+				{/if}
 			</div>
 		{/if}
 	</nav>
