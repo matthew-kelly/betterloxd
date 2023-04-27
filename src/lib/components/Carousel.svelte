@@ -3,6 +3,8 @@
 	import { media } from '$lib/api';
 	import type { MovieListResult } from '$lib/types';
 	import type { View } from '$lib/views';
+	import blob from '$lib/images/blob.svg';
+	import 'lazysizes';
 
 	export let movies: MovieListResult[];
 	export let view: View | null = null;
@@ -27,9 +29,10 @@
 				<a href="/movies/{movie.id}" class="h-full">
 					<img
 						alt={movie.title}
-						src={media(movie.poster_path, 300)}
+						src={blob}
+						data-src={media(movie.poster_path, 300)}
 						use:smoothload
-						class="rounded-md min-w-[128px]"
+						class="lazyload rounded-md min-w-[128px] border border-slate-400"
 					/>
 				</a>
 			{/each}

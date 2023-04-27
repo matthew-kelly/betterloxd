@@ -11,7 +11,7 @@
 
 <a class="flex" href="/movies/{movie.id}">
 	<img
-		class="w-full rounded-md"
+		class="w-full rounded-lg border border-slate-400"
 		src={media(backdrop.file_path, 1280)}
 		alt={movie.title}
 		style="aspect-ratio: {backdrop.aspect_ratio}"

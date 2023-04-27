@@ -7,6 +7,8 @@
 		MovieDetails,
 		MovieListResult
 	} from '$lib/types';
+	import blob from '$lib/images/blob.svg';
+	import 'lazysizes';
 
 	export let movie: MovieDetails | MovieListResult | CastMemberCredit | CrewMemberCredit;
 	export let classes = '';
@@ -15,11 +17,12 @@
 
 {#if movie.poster_path}
 	<img
-		class="w-full aspect-[2/3] h-auto bg-slate-800 {border
+		class="lazyload w-full aspect-[2/3] h-auto bg-slate-800 {border
 			? 'border border-slate-400 rounded-md'
 			: ''} {classes}"
 		alt={movie.title}
-		src={media(movie.poster_path, 300)}
+		src={blob}
+		data-src={media(movie.poster_path, 300)}
 		use:smoothload
 	/>
 {:else}

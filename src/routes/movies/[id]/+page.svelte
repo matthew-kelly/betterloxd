@@ -9,9 +9,9 @@
 	import Streaming from './Streaming.svelte';
 	import { fade } from 'svelte/transition';
 	import playicon from '$lib/images/play.svg';
-	import { media } from '$lib/api';
-	import { smoothload } from '$lib/actions';
+	// import blob_video from '$lib/images/blob-16x9.svg';
 	import { enhance } from '$app/forms';
+	import 'lazysizes';
 
 	afterNavigate(() => {
 		limit = 30;
@@ -283,12 +283,12 @@
 				{#if trailer}
 					<div class="flex flex-col" class:has-trailer={!!data.trailer}>
 						<iframe
-							src="https://www.youtube.com/embed/{trailer.key}"
+							data-src="https://www.youtube.com/embed/{trailer.key}"
 							title="YouTube video player"
 							frameborder="0"
 							allowfullscreen
 							id="trailer"
-							class="aspect-video w-full"
+							class="aspect-video w-full lazyload"
 							loading="lazy"
 						/>
 					</div>
@@ -394,7 +394,7 @@
 				<div class="hidden md:grid grid-cols-6 gap-1 h-24 mt-2">
 					{#each recommendations.slice(0, 6) as rec}
 						<a href="/movies/{rec.id}">
-							<img alt={movie.title} src={media(rec.poster_path, 200)} use:smoothload />
+							<Poster border={true} movie={rec} />
 						</a>
 					{/each}
 				</div>
