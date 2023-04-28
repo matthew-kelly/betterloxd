@@ -32,7 +32,7 @@
 					<img
 						src={media(service.logo_path, 'original')}
 						alt={service.provider_name}
-						class="w-6 rounded-md mr-2"
+						class="w-6 h-6 rounded-md mr-2"
 					/>
 					<span class="text-xs">{service.provider_name}</span>
 				</a>

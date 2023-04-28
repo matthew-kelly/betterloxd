@@ -21,8 +21,8 @@
 	<slot />
 </main>
 
-<footer class="flex justify-center h-20 p-4 bg-slate-800">
-	<span class="flex flex-nowrap items-center text-spaced text-xs md:text-sm font-bold">
+<footer class="flex justify-center min-h-[4rem] p-4 bg-slate-800">
+	<span class="flex flex-nowrap items-center text-spaced text-xs md:text-sm font-bold pb-1">
 		Data provided by <a href="https://www.themoviedb.org/">
 			<img class="ml-2 h-[9px] md:h-3" src={tmdb} alt="the movie db" />
 		</a>

@@ -30,11 +30,11 @@
 	<div class="relative">
 		<div class="carousel px-0" bind:this={c}>
 			{#each movies as movie}
-				<a href="/movies/{movie.id}">
-					{#key movie.id}
+				{#key movie.id}
+					<a href="/movies/{movie.id}" class="h-full">
 						<Poster {movie} border={true} classes="max-w-[inherit] aspect-[2/3] h-full" />
-					{/key}
-				</a>
+					</a>
+				{/key}
 			{/each}
 		</div>
 		<div class="overlay" />
@@ -56,6 +56,8 @@
 	}
 	.carousel::-webkit-scrollbar {
 		display: none;
+		width: 0 !important;
+		height: 0 !important;
 	}
 
 	.overlay {

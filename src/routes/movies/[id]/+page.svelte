@@ -90,13 +90,15 @@
 		</div>
 
 		<div class="md:hidden flex items-center text-slate-400 text-xs gap-2">
-			<a
-				href="#trailer"
-				class="flex items-center gap-1 text-spread uppercase bg-slate-700 px-2 py-1 rounded-[3px] mb-px shadow-sm hover:text-white"
-			>
-				<img src={playicon} alt="play" />
-				Trailer
-			</a>
+			{#if trailer}
+				<a
+					href="#trailer"
+					class="flex items-center gap-1 text-spread uppercase bg-slate-700 px-2 py-1 rounded-[3px] mb-px shadow-sm hover:text-white"
+				>
+					<img src={playicon} alt="play" class="w-3 h-4" />
+					Trailer
+				</a>
+			{/if}
 			<span>{movie.runtime} mins</span>
 		</div>
 

@@ -22,9 +22,8 @@
 
 {#if movie.poster_path}
 	<picture>
-		<source media="(min-width: 768px)" data-srcset={media(movie.poster_path, 300)} />
-		<source media="(min-width: 640px)" data-srcset={media(movie.poster_path, 200)} />
 		<source media="(min-width: 413px)" data-srcset={media(movie.poster_path, 300)} />
+		<source media="(min-width: 390px)" data-srcset={media(movie.poster_path, 200)} />
 		<source data-srcset={media(movie.poster_path, 185)} />
 		<img
 			src={blob}
