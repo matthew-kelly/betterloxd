@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { media } from '$lib/api';
-	import Poster from '$lib/components/Poster.svelte';
 	import type { PeopleListResult } from '$lib/types';
 
 	export let people: PeopleListResult[];
@@ -15,7 +14,7 @@
 			{#if person.profile_path}
 				<img
 					class="w-1/3 h-auto aspect-[2/3] max-w-[100px] rounded-md"
-					src={media(person.profile_path, 200)}
+					src={media(person.profile_path, 185)}
 					alt={person.name}
 				/>
 			{:else}

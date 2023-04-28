@@ -10,6 +10,8 @@
 	import { fade } from 'svelte/transition';
 	import playicon from '$lib/images/play.svg';
 	import { enhance } from '$app/forms';
+	import { onMount } from 'svelte';
+	import LazyLoad from 'vanilla-lazyload';
 
 	afterNavigate(() => {
 		limit = 30;
@@ -33,6 +35,10 @@
 	}
 
 	let is_submitting = false;
+
+	onMount(() => {
+		const ll = new LazyLoad();
+	});
 </script>
 
 <Hero {movie} />
@@ -44,8 +50,10 @@
 >
 	<div class="hidden md:block relative w-full">
 		<div class="flex sticky top-4 flex-col gap-1">
-			<Poster {movie} border={true} />
-			<Streaming {streaming} />
+			{#key movie.id}
+				<Poster {movie} border={true} />
+				<Streaming {streaming} />
+			{/key}
 		</div>
 	</div>
 
@@ -75,7 +83,9 @@
 				</span>
 			</div>
 			<div class="md:hidden grow-0 max-w-[33%] w-full">
-				<Poster {movie} border={true} />
+				{#key movie.id}
+					<Poster {movie} border={true} />
+				{/key}
 			</div>
 		</div>
 
@@ -95,7 +105,7 @@
 				<p class="text-slate-400 font-serif">{movie.overview}</p>
 				<div>
 					<div class="text-lime-500 border-b border-b-slate-700 mb-4">
-						<div class="-mb-px flex gap-2 md:gap-4">
+						<div class="-mb-px flex gap-4">
 							{#each tabs as tab}
 								<span
 									class={`cursor-pointer text-spaced text-xs md:text-sm border-b hover:border-b-lime-500 pb-1 ${
@@ -281,12 +291,12 @@
 				{#if trailer}
 					<div class="flex flex-col" class:has-trailer={!!data.trailer}>
 						<iframe
-							src="https://www.youtube.com/embed/{trailer.key}"
+							data-src="https://www.youtube.com/embed/{trailer.key}"
 							title="YouTube video player"
 							frameborder="0"
 							allowfullscreen
 							id="trailer"
-							class="aspect-video w-full lazyload"
+							class="aspect-video w-full lazy"
 							loading="lazy"
 						/>
 					</div>
@@ -392,7 +402,9 @@
 				<div class="hidden md:grid grid-cols-6 gap-1 h-24 mt-2">
 					{#each recommendations.slice(0, 6) as rec}
 						<a href="/movies/{rec.id}">
-							<Poster border={true} movie={rec} />
+							{#key rec.id}
+								<Poster border={true} movie={rec} />
+							{/key}
 						</a>
 					{/each}
 				</div>

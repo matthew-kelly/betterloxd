@@ -1,12 +1,18 @@
 <script lang="ts">
-	import { smoothload } from '$lib/actions';
-	import { media } from '$lib/api';
+	import { afterNavigate } from '$app/navigation';
 	import type { MovieListResult } from '$lib/types';
 	import type { View } from '$lib/views';
+	import Poster from './Poster.svelte';
 
 	export let movies: MovieListResult[];
 	export let view: View | null = null;
 	export let href: string | null;
+
+	let c: HTMLDivElement;
+
+	afterNavigate(() => {
+		c.scrollTo(0, 0);
+	});
 </script>
 
 <div>
@@ -22,15 +28,12 @@
 	{/if}
 
 	<div class="relative">
-		<div class="carousel px-4 md:px-0">
+		<div class="carousel px-0" bind:this={c}>
 			{#each movies as movie}
-				<a href="/movies/{movie.id}" class="h-full">
-					<img
-						alt={movie.title}
-						src={media(movie.poster_path, 200)}
-						class="rounded-md min-w-[128px] border border-slate-400"
-						use:smoothload
-					/>
+				<a href="/movies/{movie.id}">
+					{#key movie.id}
+						<Poster {movie} border={true} classes="max-w-[inherit] aspect-[2/3] h-full" />
+					{/key}
 				</a>
 			{/each}
 		</div>
@@ -40,7 +43,7 @@
 
 <style lang="postcss">
 	.carousel {
-		@apply flex whitespace-nowrap overscroll-x-contain overflow-x-auto overflow-y-hidden;
+		@apply flex gap-2 md:gap-4 whitespace-nowrap overscroll-x-contain overflow-x-auto overflow-y-hidden;
 
 		--padding: max(var(--side), calc(var(--side) + (100vw - 64rem) / 2));
 
@@ -49,7 +52,6 @@
 		scroll-snap-type: x mandatory;
 		scroll-padding-left: var(--padding);
 		padding: 0 var(--padding);
-		gap: 1rem;
 		scrollbar-width: none;
 	}
 	.carousel::-webkit-scrollbar {
@@ -78,10 +80,5 @@
 		.overlay {
 			display: none;
 		}
-	}
-
-	img {
-		height: 100%;
-		max-width: inherit;
 	}
 </style>

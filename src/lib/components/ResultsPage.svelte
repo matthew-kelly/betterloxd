@@ -27,7 +27,9 @@
 <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-2">
 	{#each movies as movie}
 		<a href="/movies/{movie.id}">
-			<Poster {movie} border={true} />
+			{#key movie.id}
+				<Poster {movie} border={true} />
+			{/key}
 		</a>
 	{/each}
 </div>

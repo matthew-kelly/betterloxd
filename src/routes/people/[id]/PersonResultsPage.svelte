@@ -13,7 +13,9 @@
 			class="tooltip"
 			data-text={movie.character || movie.job ? movie.character ?? movie.job : 'Unknown'}
 		>
-			<Poster {movie} border={true} />
+			{#key movie.id}
+				<Poster {movie} border={true} />
+			{/key}
 		</a>
 	{/each}
 </div>

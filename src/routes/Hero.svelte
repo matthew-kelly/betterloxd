@@ -10,13 +10,18 @@
 </script>
 
 <a class="flex" href="/movies/{movie.id}">
-	<img
-		class="w-full rounded-lg border border-slate-400"
-		src={media(backdrop.file_path, 1280)}
-		alt={movie.title}
-		style="aspect-ratio: {backdrop.aspect_ratio}"
-		use:smoothload
-	/>
+	<picture>
+		<source media="(min-width: 780px)" srcset={media(backdrop.file_path, 1280)} />
+		<source media="(min-width: 300px)" srcset={media(backdrop.file_path, 780)} />
+		<source srcset={media(backdrop.file_path, 300)} />
+		<img
+			class="w-full object-cover rounded-lg border border-slate-400"
+			src={media(backdrop.file_path, 1280)}
+			alt={movie.title}
+			style="aspect-ratio: {backdrop.aspect_ratio}"
+			use:smoothload
+		/>
+	</picture>
 
 	{#if logo}
 		<img

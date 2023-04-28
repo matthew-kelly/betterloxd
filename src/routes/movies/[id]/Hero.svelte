@@ -12,13 +12,18 @@
 {#if backdrop}
 	<div class="grid">
 		<div class="backdrop">
-			<img
-				class="w-full"
-				src={media(backdrop.file_path, 1280)}
-				style="aspect-ratio: {backdrop.aspect_ratio}"
-				alt={movie.title}
-				use:smoothload
-			/>
+			<picture>
+				<source media="(min-width: 780px)" srcset={media(backdrop.file_path, 1280)} />
+				<source media="(min-width: 300px)" srcset={media(backdrop.file_path, 780)} />
+				<source srcset={media(backdrop.file_path, 300)} />
+				<img
+					class="w-full object-cover"
+					src={media(backdrop.file_path, 1280)}
+					alt={movie.title}
+					style="aspect-ratio: {backdrop.aspect_ratio}"
+					use:smoothload
+				/>
+			</picture>
 
 			<div class="blur-overlay" />
 		</div>
