@@ -10,8 +10,6 @@
 	import { fade } from 'svelte/transition';
 	import playicon from '$lib/images/play.svg';
 	import { enhance } from '$app/forms';
-	import { onMount } from 'svelte';
-	import LazyLoad from 'vanilla-lazyload';
 
 	afterNavigate(() => {
 		limit = 30;
@@ -35,10 +33,6 @@
 	}
 
 	let is_submitting = false;
-
-	onMount(() => {
-		const ll = new LazyLoad();
-	});
 </script>
 
 <Hero {movie} />
@@ -52,7 +46,7 @@
 		<div class="flex sticky top-4 flex-col gap-1">
 			{#key movie.id}
 				<Poster {movie} border={true} />
-				<Streaming {streaming} />
+				<Streaming {streaming} trailer={!!trailer} />
 			{/key}
 		</div>
 	</div>
@@ -293,12 +287,12 @@
 				{#if trailer}
 					<div class="flex flex-col" class:has-trailer={!!data.trailer}>
 						<iframe
-							data-src="https://www.youtube.com/embed/{trailer.key}"
+							src="https://www.youtube.com/embed/{trailer.key}"
 							title="YouTube video player"
 							frameborder="0"
 							allowfullscreen
 							id="trailer"
-							class="aspect-video w-full lazy"
+							class="aspect-video w-full"
 							loading="lazy"
 						/>
 					</div>
@@ -373,7 +367,7 @@
 				</div>
 
 				<div class="md:hidden w-full mb-4">
-					<Streaming {streaming} />
+					<Streaming {streaming} trailer={!!trailer} />
 				</div>
 
 				{#if movie.vote_average && movie.vote_average > 0}
